@@ -34,5 +34,12 @@ namespace Hackaton.Data.Repositories
                 .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Crm.Equals(crm) && p.Estado.Equals(estado));
         }
+
+        public Task<UsuarioEntity?> GetByEmailAndSenhaAsync(string email, string senha)
+        {
+            return _dbSet
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.Email.Equals(email) && p.Senha.Equals(senha));
+        }
     }
 }
