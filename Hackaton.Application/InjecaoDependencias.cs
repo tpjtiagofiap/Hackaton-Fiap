@@ -11,6 +11,7 @@ namespace Hackaton.Application
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IUsuarioCadastrarMedicoUseCase, UsuarioCadastrarMedicoUseCase>();
+            services.AddScoped<IUsuarioCadastrarPacienteUseCase, UsuarioCadastrarPacienteUseCase>();
 
             services.AddScoped<IUsuarioPresenter, UsuarioPresenter>();
             return services;

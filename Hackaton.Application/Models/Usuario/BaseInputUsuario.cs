@@ -2,7 +2,7 @@
 
 namespace Hackaton.Application.Models.Usuario
 {
-    public class UsuarioCadastrarMedicoInputDto
+    public class BaseInputUsuario
     {
         [EmailAddress]
         public string Email { get; set; } = string.Empty;
@@ -12,14 +12,6 @@ namespace Hackaton.Application.Models.Usuario
 
         [Required]
         public string Cpf { get; set; } = string.Empty;
-
-        [Required]
-        public string Crm { get; set; } = string.Empty;
-
-        [Required]
-        [MinLength(2)]
-        [MaxLength(2)]
-        public string Estado { get; set; } = string.Empty;
 
         [Required]
         public string Nome { get; set; } = string.Empty;
