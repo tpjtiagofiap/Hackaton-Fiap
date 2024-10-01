@@ -9,21 +9,37 @@ namespace Hackaton.Application.UseCases.Medicos
     {
         private readonly IUsuarioRepository _usuarioRepository;
         private readonly IUsuarioPresenter _usuarioPresenter;
+        private readonly IAgendaRepository _agendaRepository;
 
         public MedicoBuscarTodosUseCase(
             IUsuarioRepository usuarioRepository,
-            IUsuarioPresenter usuarioPresenter
+            IUsuarioPresenter usuarioPresenter,
+            IAgendaRepository agendaRepository
         )
         {
             _usuarioRepository = usuarioRepository;
             _usuarioPresenter = usuarioPresenter;
+            _agendaRepository = agendaRepository;
         }
 
         public async Task<IEnumerable<MedicoOutputDto>> ExecuteAsync()
         {
             var data = await _usuarioRepository.GetAllMedicos();
 
-            return data.Select(p => _usuarioPresenter.FromEntityToMedicoOutput(p)).ToList();
+            var medicosComAgenda = new List<MedicoOutputDto>();
+
+            foreach (var item in data)
+            {
+                var agendas = await _agendaRepository.GetAgendasByMedicoId(item.Id);
+                if (!agendas.Any())
+                {
+                    continue;
+                }
+
+                medicosComAgenda.Add(_usuarioPresenter.FromEntityToMedicoOutput(item));
+            }
+
+            return medicosComAgenda;
         }
     }
 }
