@@ -1,6 +1,0 @@
-@Hackaton_HostAddress = http://localhost:5258
-
-GET {{Hackaton_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

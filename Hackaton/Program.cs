@@ -1,6 +1,7 @@
 using Hackaton.Application;
 using Hackaton.Data;
 using Hackaton.Infrastructure;
+using Hackaton.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,5 +29,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.Run();
