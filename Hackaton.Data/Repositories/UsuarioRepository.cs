@@ -1,4 +1,5 @@
 ﻿using Hackaton.Application.Contracts.Repositories;
+using Hackaton.Application.Enums;
 using Hackaton.Application.ObjetoValor;
 using Hackaton.Data.DataContext;
 using Hackaton.Domain;
@@ -10,6 +11,14 @@ namespace Hackaton.Data.Repositories
     {
         public UsuarioRepository(DatabaseContext context) : base(context)
         {
+        }
+
+        public async Task<IEnumerable<UsuarioEntity>> GetAllMedicos()
+        {
+            return await _dbSet
+                .AsNoTracking()
+                .Where(p => p.Perfil.Equals(nameof(EPerfil.Medico)))
+                .ToListAsync();
         }
 
         public async Task<UsuarioEntity?> GetByCpfOrEmail(Cpf cpf, Email email)

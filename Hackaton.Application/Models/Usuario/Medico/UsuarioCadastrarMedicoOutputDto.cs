@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Hackaton.Application.Models.Usuario.Medico
+﻿namespace Hackaton.Application.Models.Usuario.Medico
 {
     public class UsuarioCadastrarMedicoOutputDto : BaseOutputUsuario
     {

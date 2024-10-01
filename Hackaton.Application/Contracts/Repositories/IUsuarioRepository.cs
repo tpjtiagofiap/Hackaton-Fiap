@@ -7,5 +7,6 @@ namespace Hackaton.Application.Contracts.Repositories
     {
         Task<UsuarioEntity?> GetByCrmAndStateAsync(string crm, string estado);
         Task<UsuarioEntity?> GetByCpfOrEmail(Cpf cpf, Email email);
+        Task<IEnumerable<UsuarioEntity>> GetAllMedicos();
     }
 }
