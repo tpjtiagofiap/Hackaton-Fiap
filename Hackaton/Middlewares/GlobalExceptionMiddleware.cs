@@ -38,6 +38,10 @@ namespace Hackaton.Middlewares
                 case ConflictException:
                     statusCode = (int)HttpStatusCode.Conflict;
                     break;
+
+                case NotFoundException:
+                    statusCode = (int)HttpStatusCode.NotFound;
+                    break;
             }
 
             context.Response.StatusCode = statusCode;

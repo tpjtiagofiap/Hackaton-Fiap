@@ -30,7 +30,7 @@ namespace Hackaton.Application.UseCases.Medicos
 
             foreach (var item in data)
             {
-                var agendas = await _agendaRepository.GetAgendasByMedicoId(item.Id);
+                var agendas = await _agendaRepository.GetAgendasDisponiveisByMedicoId(item.Id);
                 if (!agendas.Any())
                 {
                     continue;
