@@ -12,11 +12,35 @@ namespace Hackaton.Data.Repositories
         {
         }
 
-        public async Task<IEnumerable<AgendaEntity>> GetAgendasByMedicoId(int medicoId)
+        public async Task<IEnumerable<AgendaEntity>> GetAgendasDisponiveisByMedicoId(int medicoId)
         {
             return await _dbSet
                 .AsNoTracking()
                 .Where(p => p.MedicoId.Equals(medicoId) && !p.PacienteId.HasValue)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AgendaEntity>> GetAgendasConflitantesByMedicoId(
+            int medicoId,
+            TimeOnly HoraInicio,
+            TimeOnly HoraFim,
+            DateOnly Data)
+        {
+            return await _dbSet
+               .AsNoTracking()
+               .Where(p => p.MedicoId == medicoId
+                           && p.Data == Data
+                           && ((p.HoraInicio < HoraFim && p.HoraFim > HoraInicio)
+                               || (p.HoraInicio >= HoraInicio && p.HoraInicio < HoraFim)
+                               || (p.HoraFim > HoraInicio && p.HoraFim <= HoraFim)))
+               .ToListAsync();
+        }
+
+        public async Task<IEnumerable<AgendaEntity>> GetAgendasByMedicoId(int medicoId)
+        {
+            return await _dbSet
+                .AsNoTracking()
+                .Where(p => p.MedicoId.Equals(medicoId))
                 .ToListAsync();
         }
     }
