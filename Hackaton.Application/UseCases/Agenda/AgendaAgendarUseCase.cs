@@ -7,11 +7,14 @@ namespace Hackaton.Application.UseCases.Agenda
     public class AgendaAgendarUseCase : IAgendaAgendarUseCase
     {
         private readonly IAgendaRepository _agendaRepository;
+        private readonly IAgendaEnviarEmailAgendamentoUseCase _agendaEnviarEmailAgendamentoUseCase;
 
         public AgendaAgendarUseCase(
-            IAgendaRepository agendaRepository)
+            IAgendaRepository agendaRepository,
+            IAgendaEnviarEmailAgendamentoUseCase agendaEnviarEmailAgendamentoUseCase)
         {
             _agendaRepository = agendaRepository;
+            _agendaEnviarEmailAgendamentoUseCase = agendaEnviarEmailAgendamentoUseCase;
         }
 
         public async Task ExecuteAsync(int agendaId, int pacienteId)
@@ -38,6 +41,8 @@ namespace Hackaton.Application.UseCases.Agenda
 
             agenda.PacienteId = pacienteId;
             await _agendaRepository.UpdateAsync(agenda);
+
+            await _agendaEnviarEmailAgendamentoUseCase.ExecuteAsync(agenda);
         }
     }
 }

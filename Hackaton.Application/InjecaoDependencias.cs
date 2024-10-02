@@ -26,6 +26,7 @@ namespace Hackaton.Application
             services.AddScoped<IAgendaEditarUseCase, AgendaEditarUseCase>();
             services.AddScoped<IAgendaExcluirUseCase, AgendaExcluirUseCase>();
             services.AddScoped<IAgendaAgendarUseCase, AgendaAgendarUseCase>();
+            services.AddScoped<IAgendaEnviarEmailAgendamentoUseCase, AgendaEnviarEmailAgendamentoUseCase>();
 
             services.AddScoped<IUsuarioPresenter, UsuarioPresenter>();
             services.AddScoped<IAgendaPresenter, AgendaPresenter>();
