@@ -19,11 +19,13 @@ namespace Hackaton.Application
             services.AddScoped<IUsuarioCadastrarMedicoUseCase, UsuarioCadastrarMedicoUseCase>();
             services.AddScoped<IUsuarioCadastrarPacienteUseCase, UsuarioCadastrarPacienteUseCase>();
             services.AddScoped<IMedicoBuscarTodosUseCase, MedicoBuscarTodosUseCase>();
+            services.AddScoped<IMedicoHorariosDisponiveisUseCase, MedicoHorariosDisponiveisUseCase>();
             services.AddScoped<IUsuarioAutenticarMedicoUseCase, UsuarioAutenticarMedicoUseCase>();
             services.AddScoped<IUsuarioAutenticarPacienteUseCase, UsuarioAutenticarPacienteUseCase>();
             services.AddScoped<IAgendaCadastrarUseCase, AgendaCadastrarUseCase>();
             services.AddScoped<IAgendaEditarUseCase, AgendaEditarUseCase>();
             services.AddScoped<IAgendaExcluirUseCase, AgendaExcluirUseCase>();
+            services.AddScoped<IAgendaAgendarUseCase, AgendaAgendarUseCase>();
 
             services.AddScoped<IUsuarioPresenter, UsuarioPresenter>();
             services.AddScoped<IAgendaPresenter, AgendaPresenter>();

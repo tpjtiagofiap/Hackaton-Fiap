@@ -14,15 +14,18 @@ namespace Hackaton.Controllers
         private readonly IAgendaCadastrarUseCase _agendaCadastrarUseCase;
         private readonly IAgendaEditarUseCase _agendaEditarUseCase;
         private readonly IAgendaExcluirUseCase _agendaExcluirUseCase;
+        private readonly IAgendaAgendarUseCase _agendaAgendarUseCase;
 
         public AgendaController(
             IAgendaCadastrarUseCase agendaCadastrarUseCase,
             IAgendaEditarUseCase agendaEditarUseCase,
-            IAgendaExcluirUseCase agendaExcluirUseCase)
+            IAgendaExcluirUseCase agendaExcluirUseCase,
+            IAgendaAgendarUseCase agendaAgendarUseCase)
         {
             _agendaCadastrarUseCase = agendaCadastrarUseCase;
             _agendaEditarUseCase = agendaEditarUseCase;
             _agendaExcluirUseCase = agendaExcluirUseCase;
+            _agendaAgendarUseCase = agendaAgendarUseCase;
         }
 
         [Authorize(Roles = nameof(EPerfil.Medico))]
@@ -34,7 +37,7 @@ namespace Hackaton.Controllers
         }
 
         [Authorize(Roles = nameof(EPerfil.Medico))]
-        [HttpPost("editar")]
+        [HttpPut("editar")]
         public async Task<ActionResult<AgendaCadastrarOutputDto>> EditarHorario(AgendaEditarInputDto input)
         {
             var id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "Id").Value);
@@ -42,13 +45,23 @@ namespace Hackaton.Controllers
         }
 
         [Authorize(Roles = nameof(EPerfil.Medico))]
-        [HttpGet("excluir/{agendaId:int}")]
-        public async Task<ActionResult<AgendaCadastrarOutputDto>> ExcluirHorario(int agendaId)
+        [HttpDelete("excluir/{agendaId:int}")]
+        public async Task<ActionResult<string>> ExcluirHorario(int agendaId)
         {
             var id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "Id").Value);
             await _agendaExcluirUseCase.ExecuteAsync(agendaId, id);
 
             return Ok("Horário excluído com sucesso");
+        }
+
+        [Authorize(Roles = nameof(EPerfil.Paciente))]
+        [HttpPost("agendar")]
+        public async Task<ActionResult<string>> AgendarHorario(int agendaId)
+        {
+            var id = int.Parse(User.Claims.FirstOrDefault(c => c.Type == "Id").Value);
+            await _agendaAgendarUseCase.ExecuteAsync(agendaId, id);
+
+            return Ok("Agendamento efetuado com sucesso");
         }
     }
 }

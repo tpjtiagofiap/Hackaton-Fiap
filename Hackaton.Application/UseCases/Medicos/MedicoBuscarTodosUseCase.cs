@@ -31,7 +31,7 @@ namespace Hackaton.Application.UseCases.Medicos
             foreach (var item in data)
             {
                 var agendas = await _agendaRepository.GetAgendasDisponiveisByMedicoId(item.Id);
-                if (!agendas.Any())
+                if (!agendas.Any(a => a.Data >= DateOnly.Parse(DateTime.Now.Date.ToShortDateString())))
                 {
                     continue;
                 }
