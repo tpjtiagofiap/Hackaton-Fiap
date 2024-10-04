@@ -28,8 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Core\Application\UseCases\Autenticacao\" />
+    <Folder Include="Core\Application\UseCases\Medicos\" />
+    <Folder Include="Core\Application\UseCases\Usuarios\" />
     <Folder Include="Infra\" />
-    <Folder Include="Core\" />
     <Folder Include="Fixtures\" />
   </ItemGroup>
 
