@@ -1,4 +1,4 @@
-name: Build and deploy .NET Core application to Web App hackaton-x-fiap
+name: Build and deploy .NET - Hackaton-x-Fiap
 on:
   push:
     branches:
